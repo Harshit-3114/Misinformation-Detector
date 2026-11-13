@@ -2,15 +2,19 @@ def _rating_to_score(rating: str):
     if not rating:
         return 50
     r = rating.lower()
+    # "Partly True" and "Misleading" both contain the substring "true", so
+    # they have to be matched before the plain True/False branches. Checking
+    # "true" first scored every "Partly True" claim as fully credible.
+    if "partly" in r or "misleading" in r:
+        return 45
     if "true" in r:
         return 90
     if "false" in r:
         return 15
-    if "partly" in r or "misleading" in r:
-        return 45
     if "unverified" in r or "none" in r:
         return 55
     return 50
+
 
 def credibility_score(fact_result: dict, image_info: dict | None = None):
     base = _rating_to_score(fact_result.get("rating", "Unverified"))

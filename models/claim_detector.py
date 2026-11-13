@@ -3,6 +3,7 @@ import spacy
 # Load spaCy model (ensure you run: python -m spacy download en_core_web_sm)
 nlp = spacy.load("en_core_web_sm")
 
+
 def extract_claims(text: str):
     """
     Simple claim extractor:
@@ -25,6 +26,6 @@ def extract_claims(text: str):
             claims.append(words)
     # fallback: if none found, split by newline and return first lines
     if not claims:
-        lines = [l.strip() for l in text.splitlines() if l.strip()]
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
         return lines[:6]
     return claims[:6]

@@ -1,6 +1,7 @@
 import os
 from PIL import Image, ExifTags
 
+
 def _extract_exif(img):
     try:
         exif = img._getexif()
@@ -13,6 +14,7 @@ def _extract_exif(img):
         return data
     except Exception:
         return None
+
 
 def check_image(path: str):
     """

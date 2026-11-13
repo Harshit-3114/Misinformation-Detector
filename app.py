@@ -39,9 +39,9 @@ async def analyze(request: Request,
             article.download()
             article.parse()
             content = article.text
-        except Exception as e:
+        except Exception:
             content = ""
-    
+
     # 2) If text provided, use it
     if text:
         content = text
@@ -60,7 +60,7 @@ async def analyze(request: Request,
         # remove temp file
         try:
             os.remove(tmp_path)
-        except:
+        except OSError:
             pass
 
     # 4) Extract claims
