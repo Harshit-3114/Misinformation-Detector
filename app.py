@@ -20,7 +20,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "result": None})
+    return templates.TemplateResponse(request, "index.html", {"result": None})
 
 
 @app.post("/analyze", response_class=HTMLResponse)
@@ -77,8 +77,7 @@ async def analyze(request: Request,
             "score": score
         })
 
-    return templates.TemplateResponse("index.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "index.html", {
         "result": results,
         "image_info": image_info,
         "image_b64": image_b64,
