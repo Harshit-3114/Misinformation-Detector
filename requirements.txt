@@ -3,6 +3,10 @@ uvicorn[standard]
 jinja2
 requests
 newspaper3k
+# newspaper3k imports lxml.html.clean, which lxml 5.2 moved out into its
+# own distribution. Without this the app fails to import on a clean
+# environment.
+lxml_html_clean
 spacy
 sentence-transformers
 scikit-learn
